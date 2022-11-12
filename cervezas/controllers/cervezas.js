@@ -20,7 +20,7 @@ async function getBeers(req, res) {
 async function getBeer(req =request, res = response) {
     const id = req.params.id
     const beers = await Cerveza.findById( id);
-    console.log(`El robert ha salido ${beers}`)
+    console.log(`El Objeto ha salido ${beers}`)
     if (beers !=null) {
         res.json(beers);
     } else {
