@@ -21,7 +21,7 @@ async function getUsers(req, res) {
 async function getUser(req =request, res = response) {
     const id = req.params.id
     const users = await Users.findById( id);
-    console.log(`El robert ha salido ${users}`)
+    console.log(`El Objeto ha salido ${users}`)
     if (users !=null) {
         res.json(users);
     } else {
@@ -46,17 +46,8 @@ async function addUser(req = request, res = response) {
         users
     });
 }
-async function getUsuariosCompleto(req, res) {
-    const {Nombre,Nick,Apellidos,Email,Contraseña,Fecha_de_creacion } = req.query
-    const query = {Nombre, Nick:"Vicente",Apellidos,Email,Contraseña,Fecha_de_creacion}
-    for (const key in query) {
-        if (query[key] === undefined) {
-          delete query[key];
-        }
-      }
-    const user = await Users.find(query)
-    res.json(user)
-}
+
+
 
 
 async function deleteUser(req, res){
@@ -76,4 +67,4 @@ async function editUser(req = request, res = response) {
     res.json(updateUsers);
 }
 
-module.exports = { getUsers, getUser, addUser, deleteUser, editUser, getUsuariosCompleto }
+module.exports = { getUsers, getUser, addUser, deleteUser, editUser, }
