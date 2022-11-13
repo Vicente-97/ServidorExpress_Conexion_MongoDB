@@ -1,6 +1,7 @@
 const db = require('../models/db')
 const { response, request } = require('express');
 const Users = require('../models/users');
+const users = require('../models/users');
 
 
 
@@ -45,6 +46,17 @@ async function addUser(req = request, res = response) {
         users
     });
 }
+async function getUsuariosCompleto(req, res) {
+    const {Nombre,Nick,Apellidos,Email,Contraseña,Fecha_de_creacion } = req.query
+    const query = {Nombre, Nick:"Vicente",Apellidos,Email,Contraseña,Fecha_de_creacion}
+    for (const key in query) {
+        if (query[key] === undefined) {
+          delete query[key];
+        }
+      }
+    const user = await Users.find(query)
+    res.json(user)
+}
 
 
 async function deleteUser(req, res){
@@ -64,4 +76,4 @@ async function editUser(req = request, res = response) {
     res.json(updateUsers);
 }
 
-module.exports = { getUsers, getUser, addUser, deleteUser, editUser }
+module.exports = { getUsers, getUser, addUser, deleteUser, editUser, getUsuariosCompleto }
